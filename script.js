@@ -20,11 +20,12 @@ let aspectRatio = window.innerWidth / window.innerHeight;
 
 // 카메라, 조명, 배경 세팅
 let camera = new THREE.PerspectiveCamera(30, aspectRatio, 0.1, 1000);
-camera.position.set(0.15, 0.1, 0.3);
+camera.position.set(0.1, 0.1, 0.2);
 
 // 새로운 방향성 빛 추가
 let directionalLight = new THREE.DirectionalLight(0xffffff, 3); // 색상 및 강도 설정
 directionalLight.position.set(3, 10, 5); // 빛의 위치 설정 (x, y, z)
+scene.background=new THREE.Color('white');
 scene.add(directionalLight);
 
 // 필요하다면, 빛이 특정 방향을 향하도록 target을 설정할 수 있습니다.
@@ -38,6 +39,8 @@ let loader = new GLTFLoader();
 const controls = new OrbitControls(camera, renderer.domElement);
 
 loader.load('macbook_final.gltf', function (gltf) {
+    gltf.scene.position.x -= 0.25;
+    gltf.scene.position.y -= 0.15; 
     scene.add(gltf.scene);
 
     // 애니메이션 적용
